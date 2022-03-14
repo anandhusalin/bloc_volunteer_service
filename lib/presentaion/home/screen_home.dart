@@ -77,7 +77,7 @@ class _ScreenHomeState extends State<ScreenHome> {
                           TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     )),
               ),
-              CategorySection(),
+              const CategorySection(),
               const HomeSection3(),
               const ServiceList(),
             ],

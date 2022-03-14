@@ -1,6 +1,10 @@
 import 'package:bloc_volunteer_service/core/constant.dart';
+import 'package:bloc_volunteer_service/model/sign_up_model.dart';
+import 'package:bloc_volunteer_service/presentaion/loginpage/login_page.dart';
 import 'package:bloc_volunteer_service/presentaion/mainpage/scrren_main_page.dart';
+import 'package:bloc_volunteer_service/services/signup_serices.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({Key? key}) : super(key: key);
@@ -9,21 +13,25 @@ class SignUp extends StatefulWidget {
   State<SignUp> createState() => _SignUpState();
 }
 
-final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
+final emailController = TextEditingController();
+final passwordController = TextEditingController();
+final nameController = TextEditingController();
+final userNameController = TextEditingController();
+final phoneController = TextEditingController();
+final genderController = TextEditingController();
+final dobController = TextEditingController();
+late SignupRequest signupRequest;
+bool isLoading = false;
 String p =
     r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
 
-RegExp regExp = RegExp(p);
 bool obserText = true;
 
 class _SignUpState extends State<SignUp> {
-  void validation() {
-    final FormState? _form = _formkey.currentState;
-    if (_form!.validate()) {
-      print("yes");
-    } else {
-      print("no");
-    }
+  @override
+  void initState() {
+    super.initState();
+    signupRequest = SignupRequest();
   }
 
   @override
@@ -31,166 +39,189 @@ class _SignUpState extends State<SignUp> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: SafeArea(
-        child: Form(
-          key: _formkey,
+        child: SingleChildScrollView(
+          reverse: true,
           child: Container(
+            margin: const EdgeInsets.symmetric(horizontal: 15),
+            padding: const EdgeInsets.all(8),
             child: Column(
               children: [
-                Container(
-                  height: 150,
-                  width: double.infinity,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: const [
-                      Text(
-                        'Register',
-                        style: TextStyle(
-                            fontSize: 50,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.orange),
-                      )
-                    ],
+                const SizedBox(
+                  height: 80,
+                  child: Text(
+                    'Register',
+                    style: TextStyle(
+                        fontSize: 50,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.orange),
                   ),
                 ),
                 const SizedBox(
                   height: 20,
                 ),
-                Container(
-                  width: double.infinity,
-                  height: 410,
-                  margin: const EdgeInsets.symmetric(horizontal: 15),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      TextFormField(
-                        validator: (value) {
-                          if (value == '') {
-                            return 'please fill Username';
-                          } else if (value!.length < 6) {
-                            return 'UserName Is Too Short';
-                          }
-
-                          return '';
-                        },
-                        decoration: InputDecoration(
-                          hintText: 'Username',
-                          hintStyle: const TextStyle(color: Colors.black),
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10)),
-                        ),
-                      ),
-                      TextFormField(
-                        validator: (value) {
-                          if (value == '') {
-                            return 'Please fill the field';
-                          } else if (!regExp.hasMatch(value!)) {
-                            return 'Email is InValid';
-                          }
-                          return '';
-                        },
-                        decoration: InputDecoration(
-                          hintText: 'Email',
-                          hintStyle: const TextStyle(color: Colors.black),
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10)),
-                        ),
-                      ),
-                      TextFormField(
-                        obscureText: obserText,
-                        validator: (value) {
-                          if (value == '') {
-                            return 'please fill Pasword';
-                          } else if (value!.length < 8) {
-                            return 'Password  Is Too Short';
-                          }
-
-                          return '';
-                        },
-                        decoration: InputDecoration(
-                            hintText: 'Password',
-                            hintStyle: const TextStyle(color: Colors.black),
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10)),
-                            suffixIcon: GestureDetector(
-                              onTap: () {
-                                setState(() {
-                                  obserText = !obserText;
-                                });
-                                FocusScope.of(context).unfocus();
-                              },
-                              child: Icon(
-                                obserText == true
-                                    ? Icons.visibility
-                                    : Icons.visibility_off,
-                                color: Colors.black,
-                              ),
-                            )),
-                      ),
-                      TextFormField(
-                        validator: (value) {
-                          if (value == '') {
-                            return 'please fill Phone Number';
-                          } else if (value!.length < 11) {
-                            return 'Phonenumber  Is Too Short';
-                          }
-
-                          return '';
-                        },
-                        decoration: InputDecoration(
-                          hintText: 'Phone',
-                          hintStyle: const TextStyle(color: Colors.black),
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10)),
-                        ),
-                      ),
-                      ConstSize.kheight2,
-                      Container(
-                        height: 45,
-                        width: double.infinity,
-                        child: ElevatedButton(
-                          onPressed: () {
-                            validation();
-                            Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => ScreenMainPage()));
-                          },
-                          style:
-                              ElevatedButton.styleFrom(primary: Colors.orange),
-                          child: const Text(
-                            'REGISTER',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20),
-                          ),
-                        ),
-                      ),
-                      Row(
-                        children: [
-                          const Text('I Have Already An Account'),
-                          const SizedBox(
-                            width: 20,
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.of(context)
-                                  .pushReplacement(MaterialPageRoute(
-                                builder: (context) => ScreenMainPage(),
-                              ));
-                            },
-                            child: const Text(
-                              'Login',
-                              style: TextStyle(
-                                  color: Colors.cyan,
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                          )
-                        ],
-                      ),
-                    ],
+                TextFormField(
+                  controller: nameController,
+                  decoration: InputDecoration(
+                    hintText: 'Name',
+                    hintStyle: const TextStyle(color: Colors.black),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10)),
                   ),
+                ),
+                ConstSize.kheight,
+                TextFormField(
+                  controller: userNameController,
+                  decoration: InputDecoration(
+                    hintText: 'Username',
+                    hintStyle: const TextStyle(color: Colors.black),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10)),
+                  ),
+                ),
+                ConstSize.kheight,
+                TextFormField(
+                  controller: emailController,
+                  decoration: InputDecoration(
+                    hintText: 'Email',
+                    hintStyle: const TextStyle(color: Colors.black),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10)),
+                  ),
+                ),
+                ConstSize.kheight,
+                TextFormField(
+                  obscureText: obserText,
+                  controller: passwordController,
+                  decoration: InputDecoration(
+                      hintText: 'Password',
+                      hintStyle: const TextStyle(color: Colors.black),
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10)),
+                      suffixIcon: GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            obserText = !obserText;
+                          });
+                          FocusScope.of(context).unfocus();
+                        },
+                        child: Icon(
+                          obserText == true
+                              ? Icons.visibility
+                              : Icons.visibility_off,
+                          color: Colors.black,
+                        ),
+                      )),
+                ),
+                ConstSize.kheight,
+                TextFormField(
+                  controller: phoneController,
+                  decoration: InputDecoration(
+                    hintText: 'Phone',
+                    hintStyle: const TextStyle(color: Colors.black),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10)),
+                  ),
+                ),
+                ConstSize.kheight,
+                TextFormField(
+                  controller: genderController,
+                  decoration: InputDecoration(
+                    hintText: 'Gender',
+                    hintStyle: const TextStyle(color: Colors.black),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10)),
+                  ),
+                ),
+                ConstSize.kheight,
+                TextFormField(
+                  controller: dobController,
+                  decoration: InputDecoration(
+                    hintText: 'DOB',
+                    hintStyle: const TextStyle(color: Colors.black),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10)),
+                  ),
+                ),
+                ConstSize.kheight2,
+                SizedBox(
+                  height: 45,
+                  width: double.infinity,
+                  child: Visibility(
+                    visible: !isLoading,
+                    child: ElevatedButton(
+                      onPressed: () async {
+                        if (emailController.text.trim().isNotEmpty &&
+                            passwordController.text.trim().isNotEmpty &&
+                            phoneController.text.trim().isNotEmpty &&
+                            userNameController.text.trim().isNotEmpty &&
+                            nameController.text.trim().isNotEmpty &&
+                            genderController.text.trim().isNotEmpty &&
+                            dobController.text.trim().isNotEmpty) {
+                          setState(() {
+                            isLoading = true;
+                          });
+                          signupRequest.dob = dobController.text.trim();
+                          signupRequest.email = emailController.text.trim();
+                          signupRequest.gender = genderController.text.trim();
+                          signupRequest.password =
+                              passwordController.text.trim();
+                          signupRequest.username =
+                              userNameController.text.trim();
+                          signupRequest.name = nameController.text.trim();
+                          signupRequest.phone = phoneController.text.trim();
+                          SignUpService signUpService = SignUpService();
+                          signUpService.signup(signupRequest).then((value) {
+                            setState(() {
+                              isLoading = false;
+                            });
+                            if (value.data != null) {
+                              Get.to(() => const Login());
+                            } else if (value.data == null) {
+                              Get.snackbar('Error', value.message!);
+                            } else if (value.message == null) {
+                              Get.snackbar('Error', 'Something went wrong',
+                                  snackPosition: SnackPosition.BOTTOM);
+                            }
+                          });
+                        }
+                      },
+                      style: ElevatedButton.styleFrom(primary: Colors.orange),
+                      child: const Text(
+                        'REGISTER',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20),
+                      ),
+                    ),
+                  ),
+                ),
+                Visibility(
+                    visible: isLoading,
+                    child: const CircularProgressIndicator(
+                      color: Colors.orange,
+                    )),
+                Row(
+                  children: [
+                    const Text('I Have Already An Account'),
+                    const SizedBox(
+                      width: 20,
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).pushReplacement(MaterialPageRoute(
+                          builder: (context) => ScreenMainPage(),
+                        ));
+                      },
+                      child: const Text(
+                        'Login',
+                        style: TextStyle(
+                            color: Colors.cyan,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    )
+                  ],
                 ),
                 const SizedBox(
                   height: 20,

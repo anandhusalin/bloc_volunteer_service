@@ -11,7 +11,7 @@ class BottomNavigationWidgets extends StatelessWidget {
         valueListenable: indexChangeNotifier,
         builder: (context, int newIndex, _) {
           return ClipRRect(
-            borderRadius: BorderRadius.only(
+            borderRadius: const BorderRadius.only(
               topRight: Radius.circular(25),
               topLeft: Radius.circular(25),
             ),

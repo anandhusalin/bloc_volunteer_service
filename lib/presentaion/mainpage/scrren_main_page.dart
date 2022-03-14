@@ -1,4 +1,3 @@
-import 'package:bloc_volunteer_service/core/colors/colors.dart';
 import 'package:bloc_volunteer_service/presentaion/addtask/screen_add_task.dart';
 import 'package:bloc_volunteer_service/presentaion/cart/screen_cart.dart';
 import 'package:bloc_volunteer_service/presentaion/home/screen_home.dart';
@@ -12,7 +11,13 @@ import '../profile/screen_profile.dart';
 class ScreenMainPage extends StatelessWidget {
   ScreenMainPage({Key? key}) : super(key: key);
 
-  final _pages = [const ScreenHome(), Profile(), Add(), Settings(), Cart()];
+  final _pages = [
+    const ScreenHome(),
+    const Profile(),
+    const Add(),
+    const Settings(),
+    const Cart()
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(

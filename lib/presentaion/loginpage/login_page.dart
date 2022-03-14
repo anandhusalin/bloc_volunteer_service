@@ -1,38 +1,42 @@
 import 'package:bloc_volunteer_service/core/constant.dart';
+import 'package:bloc_volunteer_service/model/login_model.dart';
 import 'package:bloc_volunteer_service/presentaion/mainpage/scrren_main_page.dart';
+import 'package:bloc_volunteer_service/services/login_services.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 import '../signup_page/screen_signup.dart';
 
-class login extends StatefulWidget {
-  const login({Key? key}) : super(key: key);
+class Login extends StatefulWidget {
+  const Login({Key? key}) : super(key: key);
 
   @override
-  State<login> createState() => _loginState();
+  State<Login> createState() => _LoginState();
 }
 
-final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
+final emailController = TextEditingController();
+final passwordController = TextEditingController();
+late LoginRequestModel loginModel;
+final box = GetStorage();
+
 String p =
     r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
 
-RegExp regExp = RegExp(p);
-
-void validation() {
-  final FormState? _form = _formkey.currentState;
-  if (_form!.validate()) {
-  } else {
-    print("No");
-  }
-}
-
 bool obsertext = true;
 
-class _loginState extends State<login> {
+class _LoginState extends State<Login> {
+  bool isLoading = false;
+  @override
+  void initState() {
+    super.initState();
+    loginModel = LoginRequestModel();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Form(
-        key: _formkey,
         child: Container(
           decoration: const BoxDecoration(
               image: DecorationImage(
@@ -54,14 +58,7 @@ class _loginState extends State<login> {
                     ),
                     ConstSize.kheight,
                     TextFormField(
-                      validator: (value) {
-                        if (value == '') {
-                          return 'Please enter email';
-                        } else if (!regExp.hasMatch(value!)) {
-                          return 'Email is invalid';
-                        }
-                        return '';
-                      },
+                      controller: emailController,
                       decoration: InputDecoration(
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10)),
@@ -70,16 +67,8 @@ class _loginState extends State<login> {
                     ),
                     ConstSize.kheight,
                     TextFormField(
+                      controller: passwordController,
                       obscureText: obsertext,
-                      validator: (value) {
-                        if (value == '') {
-                          return 'Please enter Password';
-                        } else if (value!.length < 8) {
-                          return 'Invalid Password';
-                        }
-
-                        return '';
-                      },
                       decoration: InputDecoration(
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10)),
@@ -108,10 +97,7 @@ class _loginState extends State<login> {
                         ConstSize.kwidth,
                         GestureDetector(
                           onTap: () {
-                            Navigator.of(context)
-                                .pushReplacement(MaterialPageRoute(
-                              builder: (context) => const SignUp(),
-                            ));
+                            Get.to(() => const SignUp());
                           },
                           child: const Text(
                             'SigunUp',
@@ -125,26 +111,61 @@ class _loginState extends State<login> {
                     ),
                     ConstSize.kheight2,
                     ConstSize.kheight1,
-                    Container(
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20)),
-                      height: 45,
-                      width: double.infinity,
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(primary: Colors.orange),
-                        onPressed: () {
-                          validation();
-                          Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => ScreenMainPage()));
-                        },
-                        child: const Text(
-                          'LOGIN',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20),
+                    Visibility(
+                        visible: isLoading,
+                        child: const CircularProgressIndicator(
+                          color: Colors.orange,
+                        )),
+                    Visibility(
+                      visible: !isLoading,
+                      child: Container(
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20)),
+                        height: 45,
+                        width: double.infinity,
+                        child: ElevatedButton(
+                          style:
+                              ElevatedButton.styleFrom(primary: Colors.orange),
+                          onPressed: () async {
+                            if (emailController.text.trim().isEmpty) {
+                              Get.snackbar('Error', 'Email field is empty');
+                            } else if (!emailController.text.trim().isEmail) {
+                              Get.snackbar('Invalid', 'Enter a Valid Email');
+                            } else if (passwordController.text.trim().isEmpty) {
+                              Get.snackbar('Error', 'Password field is empty');
+                            } else {
+                              setState(() {
+                                isLoading = true;
+                              });
+                              loginModel.email = emailController.text.trim();
+                              loginModel.password =
+                                  passwordController.text.trim();
+                              LoginService loginService = LoginService();
+                              loginService.login(loginModel).then((value) {
+                                setState(() {
+                                  isLoading = false;
+                                });
+                                if (value.data != null) {
+                                  box.write('user', 'value');
+                                  Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              ScreenMainPage()));
+                                } else {
+                                  Get.snackbar(
+                                      'Error', 'Invalid Email or Password');
+                                }
+                              });
+                            }
+                          },
+                          child: const Text(
+                            'LOGIN',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20),
+                          ),
                         ),
                       ),
                     ),

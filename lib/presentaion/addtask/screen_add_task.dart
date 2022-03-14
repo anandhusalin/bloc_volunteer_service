@@ -61,11 +61,11 @@ class _AddState extends State<Add> {
         children: [
           Column(
             children: [
-              Padding(
-                padding: const EdgeInsets.only(right: 25),
+              const Padding(
+                padding: EdgeInsets.only(right: 25),
                 child: Text('Requierment'),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 5,
               ),
               Container(
@@ -74,7 +74,7 @@ class _AddState extends State<Add> {
                 decoration: BoxDecoration(
                     border: Border.all(color: Colors.grey),
                     borderRadius: BorderRadius.circular(5)),
-                child: TextField(
+                child: const TextField(
                   decoration: InputDecoration.collapsed(hintText: ''),
                 ),
               ),
@@ -82,7 +82,7 @@ class _AddState extends State<Add> {
           ),
           Column(
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Container(
@@ -95,7 +95,7 @@ class _AddState extends State<Add> {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       GestureDetector(
-                        child: Text(
+                        child: const Text(
                           '+',
                           style: TextStyle(color: Colors.orange, fontSize: 22),
                         ),
@@ -105,13 +105,14 @@ class _AddState extends State<Add> {
                       ),
                       Text(
                         '$_counter',
-                        style: TextStyle(color: Colors.black, fontSize: 22),
+                        style:
+                            const TextStyle(color: Colors.black, fontSize: 22),
                       ),
                       GestureDetector(
                           onTap: () {
                             _decrement();
                           },
-                          child: Text(
+                          child: const Text(
                             '-',
                             style:
                                 TextStyle(color: Colors.orange, fontSize: 22),
@@ -122,7 +123,7 @@ class _AddState extends State<Add> {
           ),
           Column(
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Container(
@@ -135,7 +136,7 @@ class _AddState extends State<Add> {
                     children: [
                       DropdownButton(
                         value: dropdownvalue,
-                        icon: Icon(
+                        icon: const Icon(
                           Icons.keyboard_arrow_down,
                           size: 1,
                         ),
@@ -144,7 +145,7 @@ class _AddState extends State<Add> {
                               value: items,
                               child: Text(
                                 items,
-                                style: TextStyle(fontSize: 10),
+                                style: const TextStyle(fontSize: 10),
                               ));
                         }).toList(),
                         onChanged: (String? newValue) {
@@ -218,23 +219,24 @@ class _AddState extends State<Add> {
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Container(
-            margin: EdgeInsets.symmetric(horizontal: 15),
+            margin: const EdgeInsets.symmetric(horizontal: 15),
             child: Column(
               children: [
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 Column(
                   children: [
-                    Text(
+                    const Text(
                       'ISSUE',
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.lightBlueAccent,
                           fontSize: 25),
                     ),
-                    Align(alignment: Alignment.topLeft, child: Text('Problem')),
-                    SizedBox(
+                    const Align(
+                        alignment: Alignment.topLeft, child: Text('Problem')),
+                    const SizedBox(
                       height: 5,
                     ),
                     Container(
@@ -243,16 +245,16 @@ class _AddState extends State<Add> {
                       decoration: BoxDecoration(
                           border: Border.all(color: Colors.grey),
                           borderRadius: BorderRadius.circular(5)),
-                      child: TextField(
+                      child: const TextField(
                         decoration: InputDecoration.collapsed(hintText: ''),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
-                    Align(
+                    const Align(
                         alignment: Alignment.topLeft, child: Text('Location')),
-                    SizedBox(
+                    const SizedBox(
                       height: 5,
                     ),
                     Container(
@@ -261,17 +263,17 @@ class _AddState extends State<Add> {
                       decoration: BoxDecoration(
                           border: Border.all(color: Colors.grey),
                           borderRadius: BorderRadius.circular(5)),
-                      child: TextField(
+                      child: const TextField(
                         decoration: InputDecoration.collapsed(hintText: ''),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
-                    Align(
+                    const Align(
                         alignment: Alignment.topLeft,
                         child: Text('Description')),
-                    SizedBox(
+                    const SizedBox(
                       height: 5,
                     ),
                     Container(
@@ -280,15 +282,16 @@ class _AddState extends State<Add> {
                       decoration: BoxDecoration(
                           border: Border.all(color: Colors.grey),
                           borderRadius: BorderRadius.circular(5)),
-                      child: TextField(
+                      child: const TextField(
                         decoration: InputDecoration.collapsed(hintText: ''),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
-                    Align(alignment: Alignment.topLeft, child: Text('Images')),
-                    SizedBox(
+                    const Align(
+                        alignment: Alignment.topLeft, child: Text('Images')),
+                    const SizedBox(
                       height: 5,
                     ),
                     Row(
@@ -301,7 +304,7 @@ class _AddState extends State<Add> {
                                 border: Border.all(color: Colors.grey),
                                 borderRadius: BorderRadius.circular(5)),
                             child: IconButton(
-                              icon: Icon(
+                              icon: const Icon(
                                 Icons.camera_alt_outlined,
                                 size: 40,
                                 color: Colors.orange,
@@ -315,7 +318,7 @@ class _AddState extends State<Add> {
                                 border: Border.all(color: Colors.grey),
                                 borderRadius: BorderRadius.circular(5)),
                             child: IconButton(
-                              icon: Icon(
+                              icon: const Icon(
                                 Icons.camera_alt_outlined,
                                 size: 40,
                                 color: Colors.orange,
@@ -329,7 +332,7 @@ class _AddState extends State<Add> {
                                 border: Border.all(color: Colors.grey),
                                 borderRadius: BorderRadius.circular(5)),
                             child: IconButton(
-                              icon: Icon(
+                              icon: const Icon(
                                 Icons.camera_alt_outlined,
                                 size: 40,
                                 color: Colors.orange,
@@ -338,7 +341,7 @@ class _AddState extends State<Add> {
                             )),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 8,
                     ),
                     Row(
@@ -351,7 +354,7 @@ class _AddState extends State<Add> {
                                 border: Border.all(color: Colors.grey),
                                 borderRadius: BorderRadius.circular(5)),
                             child: IconButton(
-                              icon: Icon(
+                              icon: const Icon(
                                 Icons.camera_alt_outlined,
                                 size: 40,
                                 color: Colors.orange,
@@ -365,7 +368,7 @@ class _AddState extends State<Add> {
                                 border: Border.all(color: Colors.grey),
                                 borderRadius: BorderRadius.circular(5)),
                             child: IconButton(
-                              icon: Icon(
+                              icon: const Icon(
                                 Icons.camera_alt_outlined,
                                 size: 40,
                                 color: Colors.orange,
@@ -379,7 +382,7 @@ class _AddState extends State<Add> {
                                 border: Border.all(color: Colors.grey),
                                 borderRadius: BorderRadius.circular(5)),
                             child: IconButton(
-                              icon: Icon(
+                              icon: const Icon(
                                 Icons.camera_alt_outlined,
                                 size: 40,
                                 color: Colors.orange,
@@ -388,31 +391,31 @@ class _AddState extends State<Add> {
                             )),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 8,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
-                    Divider(
+                    const Divider(
                       color: Colors.black,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
-                    Text(
+                    const Text(
                       'SOLUTION',
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.lightBlueAccent,
                           fontSize: 25),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
-                    Align(
+                    const Align(
                         alignment: Alignment.topLeft, child: Text('Solution')),
-                    SizedBox(
+                    const SizedBox(
                       height: 5,
                     ),
                     Container(
@@ -421,17 +424,17 @@ class _AddState extends State<Add> {
                       decoration: BoxDecoration(
                           border: Border.all(color: Colors.grey),
                           borderRadius: BorderRadius.circular(5)),
-                      child: TextField(
+                      child: const TextField(
                         decoration: InputDecoration.collapsed(hintText: ''),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
-                    Align(
+                    const Align(
                         alignment: Alignment.topLeft,
                         child: Text('Description')),
-                    SizedBox(
+                    const SizedBox(
                       height: 5,
                     ),
                     Container(
@@ -440,22 +443,22 @@ class _AddState extends State<Add> {
                       decoration: BoxDecoration(
                           border: Border.all(color: Colors.grey),
                           borderRadius: BorderRadius.circular(5)),
-                      child: TextField(
+                      child: const TextField(
                         decoration: InputDecoration.collapsed(hintText: ''),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 15,
                     ),
-                    Divider(
+                    const Divider(
                       height: 1,
                       thickness: 1,
                       color: Colors.grey,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 15,
                     ),
-                    Align(
+                    const Align(
                         alignment: Alignment.topLeft,
                         child: Text(
                           'Number of Volunteer',
@@ -466,7 +469,7 @@ class _AddState extends State<Add> {
                       children: [
                         Column(
                           children: [
-                            SizedBox(
+                            const SizedBox(
                               height: 20,
                             ),
                             Container(
@@ -477,12 +480,12 @@ class _AddState extends State<Add> {
                                     borderRadius: BorderRadius.circular(5)),
                                 child: Row(
                                   children: [
-                                    SizedBox(
+                                    const SizedBox(
                                       width: 10,
                                     ),
-                                    Text('No Limit'),
+                                    const Text('No Limit'),
                                     Checkbox(
-                                        value: this._ischecked,
+                                        value: _ischecked,
                                         onChanged: (bool? value) {
                                           setState(() {
                                             _ischecked = value!;
@@ -494,7 +497,7 @@ class _AddState extends State<Add> {
                         ),
                         Column(
                           children: [
-                            SizedBox(
+                            const SizedBox(
                               height: 20,
                             ),
                             Container(
@@ -508,7 +511,7 @@ class _AddState extends State<Add> {
                                       MainAxisAlignment.spaceAround,
                                   children: [
                                     GestureDetector(
-                                      child: Text(
+                                      child: const Text(
                                         '+',
                                         style: TextStyle(
                                             color: Colors.orange, fontSize: 22),
@@ -519,14 +522,14 @@ class _AddState extends State<Add> {
                                     ),
                                     Text(
                                       '$_counter',
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                           color: Colors.black, fontSize: 22),
                                     ),
                                     GestureDetector(
                                         onTap: () {
                                           _decrement();
                                         },
-                                        child: Text(
+                                        child: const Text(
                                           '-',
                                           style: TextStyle(
                                               color: Colors.orange,
@@ -538,22 +541,22 @@ class _AddState extends State<Add> {
                         ),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
-                    Text(
+                    const Text(
                       'REQUIREMENTS',
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.lightBlueAccent,
                           fontSize: 25),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     Column(
                       children: [
-                        Container(
+                        SizedBox(
                           height: 300,
                           width: MediaQuery.of(context).size.width,
                           child: ListView.builder(
@@ -567,8 +570,8 @@ class _AddState extends State<Add> {
                         ),
                         Padding(
                           padding: const EdgeInsets.all(16.0),
-                          child: RaisedButton(
-                            child: Text('add new'),
+                          child: ElevatedButton(
+                            child: const Text('add new'),
                             onPressed: () =>
                                 setState(() => cards.add(createCard())),
                           ),

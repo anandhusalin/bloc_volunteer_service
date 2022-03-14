@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart  ';
+import 'package:flutter/material.dart';
 
 class ConstSize {
   static const kwidth = SizedBox(

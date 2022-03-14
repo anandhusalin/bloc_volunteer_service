@@ -1,8 +1,11 @@
 import 'dart:async';
 
+import 'package:bloc_volunteer_service/presentaion/home/screen_home.dart';
 import 'package:bloc_volunteer_service/presentaion/loginpage/login_page.dart';
 
 import 'package:flutter/material.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:get/get.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -12,13 +15,17 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  final box = GetStorage();
   @override
   void initState() {
     super.initState();
     Timer(
         const Duration(seconds: 3),
-        () => Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => const login())));
+        () => box.read('user') != null
+            ? Navigator.pushReplacement(context,
+                MaterialPageRoute(builder: (context) => const ScreenHome()))
+            : Navigator.pushReplacement(context,
+                MaterialPageRoute(builder: (context) => const Login())));
   }
 
   @override

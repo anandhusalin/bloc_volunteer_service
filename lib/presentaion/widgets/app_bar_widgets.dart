@@ -23,7 +23,7 @@ class AppBarWidgets extends StatelessWidget {
             ),
             const Spacer(),
             Row(
-              children: [
+              children: const [
                 Text(
                   'Dubai',
                   // style: GoogleFonts.montserrat(
@@ -32,7 +32,7 @@ class AppBarWidgets extends StatelessWidget {
                   //     fontWeight: FontWeight.bold),
                 ),
                 ConstSize.kwidth,
-                const Icon(
+                Icon(
                   Icons.location_on,
                   color: Colors.orange,
                 ),
