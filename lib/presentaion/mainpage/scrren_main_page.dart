@@ -14,7 +14,7 @@ class ScreenMainPage extends StatelessWidget {
   final _pages = [
     const ScreenHome(),
     const Profile(),
-    const Add(),
+    const AddScreen(),
     const Settings(),
     const Cart()
   ];

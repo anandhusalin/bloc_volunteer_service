@@ -1,11 +1,8 @@
 import 'dart:async';
-
-import 'package:bloc_volunteer_service/presentaion/home/screen_home.dart';
 import 'package:bloc_volunteer_service/presentaion/loginpage/login_page.dart';
-
+import 'package:bloc_volunteer_service/presentaion/mainpage/scrren_main_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:get/get.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -23,7 +20,7 @@ class _SplashScreenState extends State<SplashScreen> {
         const Duration(seconds: 3),
         () => box.read('user') != null
             ? Navigator.pushReplacement(context,
-                MaterialPageRoute(builder: (context) => const ScreenHome()))
+                MaterialPageRoute(builder: (context) => ScreenMainPage()))
             : Navigator.pushReplacement(context,
                 MaterialPageRoute(builder: (context) => const Login())));
   }

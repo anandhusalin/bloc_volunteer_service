@@ -12,7 +12,7 @@ class SignUpService {
       ),
       headers: {"Content-Type": "application/json; charset=UTF-8"},
     );
-
+    print(response.body);
     var data = jsonDecode(response.body);
 
     if (response.statusCode == 200 && data['status'] == null) {
