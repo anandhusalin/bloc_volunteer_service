@@ -1,6 +1,8 @@
-import 'package:bloc_volunteer_service/presentaion/widgets/text_controllers.dart';
+import 'package:bloc_volunteer_service/model/services_model.dart';
+import 'package:bloc_volunteer_service/presentaion/addtask/requirement_screen.dart';
+import 'package:bloc_volunteer_service/services/service_services.dart';
 import 'package:flutter/material.dart';
-
+import 'package:get/get.dart';
 import 'package:bloc_volunteer_service/core/constant.dart';
 
 class AddScreen extends StatefulWidget {
@@ -11,101 +13,18 @@ class AddScreen extends StatefulWidget {
 }
 
 class _AddScreenState extends State<AddScreen> {
+  late ServiceModel serviceModel;
   final probleController = TextEditingController();
   final locationController = TextEditingController();
   final descripationController = TextEditingController();
   final solutionController = TextEditingController();
   final solutionDescriptionController = TextEditingController();
-  List counts = [
-    requirementsCount1,
-    requirementsCount2,
-    requirementsCount3,
-    requirementsCount4,
-    requirementsCount5,
-    requirementsCount6,
-    requirementsCount7,
-    requirementsCount8,
-    requirementsCount9,
-    requirementsCount10,
-    requirementsCount11,
-    requirementsCount12,
-    requirementsCount13,
-    requirementsCount14,
-    requirementsCount15,
-    requirementsCount16,
-    requirementsCount17,
-    requirementsCount18,
-    requirementsCount19,
-    requirementsCount20
-  ];
-  List controllers = [
-    requierment1,
-    requierment2,
-    requierment3,
-    requierment4,
-    requierment5,
-    requierment6,
-    requierment7,
-    requierment8,
-    requierment9,
-    requierment10,
-    requierment11,
-    requierment12,
-    requierment13,
-    requierment14,
-    requierment15,
-    requierment16,
-    requierment17,
-    requierment18,
-    requierment19,
-    requierment20,
-    requierment21,
-    requierment22,
-    requierment23,
-    requierment24,
-    requierment25,
-    requierment26,
-    requierment27,
-    requierment28,
-    requierment29,
-    requierment30,
-    requierment31,
-    requierment32,
-    requierment33,
-    requierment34,
-    requierment35,
-    requierment36,
-    requierment37,
-    requierment38,
-    requierment39,
-    requierment40,
-    requierment41,
-    requierment42,
-    requierment43,
-    requierment44,
-    requierment45,
-    requierment46,
-    requierment47,
-    requierment48,
-    requierment49,
-    requierment50,
-    requierment51,
-    requierment52,
-    requierment53,
-    requierment54,
-    requierment55,
-    requierment56,
-    requierment57,
-    requierment58,
-    requierment59,
-    requierment60
-  ];
-  String defaultvalue = 'A';
-  int length = 0;
+
   int count = 0;
   @override
   void initState() {
     super.initState();
+    serviceModel = ServiceModel();
   }
 
   @override
@@ -153,7 +72,7 @@ class _AddScreenState extends State<AddScreen> {
         ]),
       ),
       body: SingleChildScrollView(
-        reverse: true,
+        //reverse: true,
         child: Container(
           margin: const EdgeInsets.all(20),
           child: Column(
@@ -172,7 +91,7 @@ class _AddScreenState extends State<AddScreen> {
               ),
               ConstSize.kheight,
               Inputfield(
-                height: 40,
+                height: 60,
                 controller: probleController,
                 title: 'Problem',
                 hint: 'Problem',
@@ -193,6 +112,7 @@ class _AddScreenState extends State<AddScreen> {
               ),
               ConstSize.kheight,
               GridView.builder(
+                physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 itemCount: 6,
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -313,127 +233,30 @@ class _AddScreenState extends State<AddScreen> {
                 ],
               ),
               ConstSize.kheight,
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
-                  Text('REQUIREMENTS',
-                      style: TextStyle(
-                          color: Colors.blue,
-                          fontSize: 25,
-                          fontWeight: FontWeight.w600)),
-                ],
-              ),
-              ListView.builder(
-                itemCount: length,
-                shrinkWrap: true,
-                itemBuilder: (context, index) {
-                  //controllers.add();
-                  return Padding(
-                    padding: const EdgeInsets.only(top: 8, bottom: 8),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Expanded(
-                          flex: 6,
-                          child: Container(
-                            height: 50,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(6),
-                                border:
-                                    Border.all(width: 2, color: Colors.grey)),
-                            child: TextFormField(
-                              controller: controllers[index],
-                              keyboardType: TextInputType.multiline,
-                              maxLines: null,
-                              decoration: const InputDecoration(
-                                border: InputBorder.none,
-                              ),
-                            ),
-                          ),
-                        ),
-                        const Expanded(
-                            flex: 1,
-                            child: SizedBox(
-                              width: 10,
-                            )),
-                        Expanded(
-                          flex: 3,
-                          child: Container(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                GestureDetector(
-                                    onTap: () {
-                                      setState(() {
-                                        counts[index]++;
-                                      });
-                                    },
-                                    child: const Text('+')),
-                                const SizedBox(
-                                  width: 8,
-                                ),
-                                Text('${counts[index]}'),
-                                const SizedBox(
-                                  width: 8,
-                                ),
-                                GestureDetector(
-                                    onTap: () {
-                                      setState(() {
-                                        counts[index]--;
-                                      });
-                                    },
-                                    child: const Text('-'))
-                              ],
-                            ),
-                            height: 50,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(6),
-                                border:
-                                    Border.all(width: 2, color: Colors.grey)),
-                          ),
-                        ),
-                        const Expanded(
-                            flex: 1,
-                            child: SizedBox(
-                              width: 10,
-                            )),
-                        Expanded(
-                          flex: 3,
-                          child: Container(
-                            child: DropdownButton<String>(
-                              value: defaultvalue,
-                              items: ['A', 'B', 'C', 'D'].map((String value) {
-                                return DropdownMenuItem(
-                                  value: value,
-                                  child: Text(value),
-                                );
-                              }).toList(),
-                              onChanged: (value1) {
-                                setState(() {
-                                  defaultvalue = value1!;
-                                });
-                              },
-                            ),
-                            height: 50,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(6),
-                                border:
-                                    Border.all(width: 2, color: Colors.grey)),
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
-                },
-              ),
+              ConstSize.kheight,
               ElevatedButton(
-                  onPressed: () {
-                    print(requierment1.text);
-                    setState(() {
-                      length++;
+                  onPressed: () async {
+                    if (solutionController.text.isNotEmpty &&
+                        solutionDescriptionController.text.isNotEmpty &&
+                        count != 0 &&
+                        probleController.text.isNotEmpty &&
+                        locationController.text.isNotEmpty &&
+                        descripationController.text.isNotEmpty) {
+                      serviceModel.issueDesc = descripationController.text;
+                      serviceModel.issueLoc = locationController.text;
+                      serviceModel.issueTitle = solutionController.text;
+                      serviceModel.taskDesc =
+                          solutionDescriptionController.text;
+                      serviceModel.taskTitle = solutionController.text;
+                      serviceModel.volunteerLimit = count;
+                    }
+                    ServicesService servicesService = ServicesService();
+                    servicesService.signup(serviceModel).then((value) {
+                      print(value.message);
+                      Get.to(() => const RequirementsScreen());
                     });
                   },
-                  child: const Text('Add'))
+                  child: const Text('Add requirement'))
             ],
           ),
         ),
