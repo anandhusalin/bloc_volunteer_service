@@ -1,11 +1,13 @@
-import 'package:bloc_volunteer_service/presentaion/widgets/services_content.dart';
+import 'package:bloc_volunteer_service/model/home_screen_model.dart';
 import 'package:flutter/material.dart';
 
-import '../../model/profile_list_model.dart';
+import 'package:bloc_volunteer_service/presentaion/widgets/services_content.dart';
 
 class ServiceList extends StatelessWidget {
+  final List<HomeServicesModel> users;
   const ServiceList({
     Key? key,
+    required this.users,
   }) : super(key: key);
 
   @override
@@ -17,10 +19,10 @@ class ServiceList extends StatelessWidget {
       crossAxisCount: 2,
       mainAxisSpacing: 10,
       crossAxisSpacing: 10,
-      children: List.generate(profilelist.length, (index) {
+      children: List.generate(users.length, (index) {
         return Center(
           child: ProfileListview(
-            list: profilelist[index],
+            list: users[index],
           ),
         );
       }),

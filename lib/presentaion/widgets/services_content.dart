@@ -1,9 +1,8 @@
+import 'package:bloc_volunteer_service/model/home_screen_model.dart';
 import 'package:flutter/material.dart';
 
-import '../../model/profile_list_model.dart';
-
 class ProfileListview extends StatelessWidget {
-  final ProfileListViewModel list;
+  final HomeServicesModel list;
   const ProfileListview({
     required this.list,
     Key? key,
@@ -15,8 +14,8 @@ class ProfileListview extends StatelessWidget {
         height: 150,
         width: 150,
         decoration: BoxDecoration(
-          image:
-              DecorationImage(fit: BoxFit.fill, image: AssetImage(list.image1)),
+          image: DecorationImage(
+              fit: BoxFit.fill, image: NetworkImage(list.img1!)),
           borderRadius: BorderRadius.circular(10),
         ),
         child: Stack(
@@ -32,7 +31,7 @@ class ProfileListview extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     Text(
-                      list.text1,
+                      list.taskTitle!,
                       style: const TextStyle(
                           color: Colors.white,
                           fontSize: 14,

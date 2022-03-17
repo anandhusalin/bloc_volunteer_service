@@ -1,14 +1,18 @@
-import 'package:bloc_volunteer_service/core/colors/colors.dart';
-import 'package:bloc_volunteer_service/core/constant.dart';
-
-import 'package:bloc_volunteer_service/presentaion/profile/widgets/profile_button.dart';
-
-import 'package:bloc_volunteer_service/presentaion/widgets/app_bar_widgets.dart';
-import 'package:bloc_volunteer_service/presentaion/widgets/service_list.dart';
 import 'package:flutter/material.dart';
 
+import 'package:bloc_volunteer_service/core/colors/colors.dart';
+import 'package:bloc_volunteer_service/core/constant.dart';
+import 'package:bloc_volunteer_service/model/home_screen_model.dart';
+import 'package:bloc_volunteer_service/presentaion/profile/widgets/profile_button.dart';
+import 'package:bloc_volunteer_service/presentaion/widgets/app_bar_widgets.dart';
+import 'package:bloc_volunteer_service/presentaion/widgets/service_list.dart';
+
 class Profile extends StatelessWidget {
-  const Profile({Key? key}) : super(key: key);
+  final List<HomeServicesModel> user;
+  const Profile({
+    Key? key,
+    required this.user,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,11 +24,11 @@ class Profile extends StatelessWidget {
           )),
       body: Center(
         child: ListView(
-          children: const [
+          children: [
             ConstSize.kheight,
-            ProfileSection1(),
-            ProfileSection3(),
-            ServiceList(),
+            const ProfileSection1(),
+            const ProfileSection3(),
+            ServiceList(users: user),
           ],
         ),
       ),
