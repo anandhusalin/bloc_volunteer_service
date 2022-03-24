@@ -17,6 +17,7 @@ class ServiceModel {
     this.issueTitle,
     this.issueLoc,
     this.issueDesc,
+
   });
 
   String? taskTitle;
@@ -25,6 +26,8 @@ class ServiceModel {
   String? issueTitle;
   String? issueLoc;
   String? issueDesc;
+
+
 
   factory ServiceModel.fromJson(Map<String, dynamic> json) => ServiceModel(
         taskTitle: json["task_title"],

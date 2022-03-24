@@ -6,14 +6,15 @@ import 'package:http/http.dart' as http;
 class ServicesService {
   Future<ServiceResponse> signup(ServiceModel serviceModel) async {
     final response = await http.post(
-      Uri.parse('https://volunteer.cyberforttech.com/api/register'),
+      Uri.parse('https://volunteer.cyberfort.co.in/api/save-service'),
       body: jsonEncode(
         serviceModel.toJson(),
       ),
       headers: {"Content-Type": "application/json; charset=UTF-8"},
     );
-    print(response.body);
+     print(response.body);
     var data = jsonDecode(response.body);
+    
 
     if (response.statusCode == 200 && data['status'] == null) {
       return ServiceResponse.fromJson(data);

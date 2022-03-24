@@ -28,7 +28,7 @@ class Profile extends StatelessWidget {
             ConstSize.kheight,
             const ProfileSection1(),
             const ProfileSection3(),
-            ServiceList(users: user),
+            ServiceList(),
           ],
         ),
       ),
@@ -50,9 +50,11 @@ class ProfileSection1 extends StatelessWidget {
           'Hello,',
           style: TextStyle(color: kblack, fontSize: 25),
         ),
+
         const Text(
-          'Anandhu',
-          style: TextStyle(color: korange, fontSize: 25),
+          '  Anandhu',
+          style: TextStyle(color: kblue, fontSize: 25,
+          fontWeight: FontWeight.bold),
         ),
         const Spacer(),
         Container(

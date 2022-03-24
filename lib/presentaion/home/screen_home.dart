@@ -1,10 +1,8 @@
 import 'package:bloc_volunteer_service/core/constant.dart';
-import 'package:bloc_volunteer_service/model/home_screen_model.dart';
 import 'package:bloc_volunteer_service/presentaion/home/widgets/search_idle.dart';
 import 'package:bloc_volunteer_service/presentaion/widgets/app_bar_widgets.dart';
 
 import 'package:bloc_volunteer_service/presentaion/widgets/service_list.dart';
-import 'package:bloc_volunteer_service/services/home_services.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
@@ -20,8 +18,6 @@ class ScreenHome extends StatefulWidget {
 
 class _ScreenHomeState extends State<ScreenHome> {
   int index = 0;
-  List<HomeServicesModel> users = [];
-  // HomeService homeService = HomeService();
   Widget movingCard() {
     return CarouselSlider(
         items: const [
@@ -54,54 +50,39 @@ class _ScreenHomeState extends State<ScreenHome> {
   }
 
   @override
-  void initState() {
-    super.initState();
-    HomeService.getdata().then((value) {
-      setState(() {
-        users = value;
-      });
-    });
-    print(users.length);
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: const PreferredSize(
             preferredSize: Size.fromHeight(50),
             child: AppBarWidgets(title: 'Welcome')),
-        body: users.isNotEmpty
-            ? SingleChildScrollView(
-                child: Column(
-                  // ignore: prefer_const_literals_to_create_immutables
-                  children: [
-                    ConstSize.kheight2,
-                    const SearchIdleWidget(),
-                    movingCard(),
+        body: SingleChildScrollView(
+          child: Column(
+            // ignore: prefer_const_literals_to_create_immutables
+            children: [
+              ConstSize.kheight2,
+              const SearchIdleWidget(),
+              movingCard(),
 
-                    //popular section
+              //popular section
 
-                    const HomeSection3(),
-                    ServiceList(users: users),
-                    const Padding(
-                      padding: EdgeInsets.all(10.0),
-                      child: Align(
-                          alignment: Alignment.topLeft,
-                          child: Text(
-                            'CATEGORY',
-                            style: TextStyle(
-                                fontSize: 20, fontWeight: FontWeight.bold),
-                          )),
-                    ),
-                    const CategorySection(),
-                    const HomeSection3(),
-                    ServiceList(users: users),
-                  ],
-                ),
-              )
-            : const CircularProgressIndicator(
-                color: Colors.orange,
-              ));
+              const HomeSection3(),
+               ServiceList(),
+              const Padding(
+                padding: EdgeInsets.all(10.0),
+                child: Align(
+                    alignment: Alignment.topLeft,
+                    child: Text(
+                      'CATEGORY',
+                      style:
+                      TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    )),
+              ),
+              const CategorySection(),
+              const HomeSection3(),
+              const ServiceList(),
+            ],
+          ),
+        ));
   }
 }
 
@@ -124,8 +105,11 @@ class HomeSection3 extends StatelessWidget {
           Row(
             children: const [
               Text('View All'),
+
               SizedBox(
+
                 width: 5,
+
               ),
               Icon(
                 Icons.arrow_forward_ios_outlined,

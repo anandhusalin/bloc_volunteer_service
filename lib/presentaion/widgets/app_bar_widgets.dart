@@ -16,6 +16,12 @@ class AppBarWidgets extends StatelessWidget {
             ConstSize.kwidth,
             Text(
               title,
+              style: TextStyle(
+                color: Colors.orange,
+                fontSize: 25,
+                fontWeight: FontWeight.bold
+              ),
+
               // style: GoogleFonts.montserrat(
               //     fontSize: 25,
               //     color: Colors.orange,
@@ -26,6 +32,10 @@ class AppBarWidgets extends StatelessWidget {
               children: const [
                 Text(
                   'Dubai',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 25
+                  ),
                   // style: GoogleFonts.montserrat(
                   //     fontSize: 25,
                   //     color: Colors.blue,

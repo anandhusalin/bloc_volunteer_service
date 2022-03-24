@@ -17,7 +17,7 @@ class SearchIdleWidget extends StatelessWidget {
         child: TextField(
           decoration: InputDecoration(
               border:
-                  OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+              OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
               // labelText: 'Enter Name Here',
 
               hintText: 'Search Your Services',

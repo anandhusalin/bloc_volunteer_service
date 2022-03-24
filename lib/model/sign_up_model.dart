@@ -1,5 +1,5 @@
 import 'dart:convert';
-
+// ith enna sadhanam mansilayilla
 SignupRequest signupRequestFromJson(String str) =>
     SignupRequest.fromJson(json.decode(str));
 
@@ -25,7 +25,8 @@ class SignupRequest {
   String? gender;
   String? dob;
   String? phone;
-
+  
+// 
   factory SignupRequest.fromJson(Map<String, dynamic> json) => SignupRequest(
         username: json["username"],
         name: json["name"],
@@ -47,4 +48,5 @@ class SignupRequest {
         "dob": dob,
         "phone": phone,
       };
+
 }

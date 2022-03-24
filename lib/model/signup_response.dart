@@ -11,7 +11,7 @@ class SignupResponse {
   String? message;
   String? status;
   Data? data;
-
+//https://app.quicktype.io/
   factory SignupResponse.fromJson(Map<String, dynamic> json) => SignupResponse(
         message: json["message"],
         status: json['status'],

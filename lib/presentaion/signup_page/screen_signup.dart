@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:bloc_volunteer_service/core/constant.dart';
 import 'package:bloc_volunteer_service/model/sign_up_model.dart';
 import 'package:bloc_volunteer_service/presentaion/loginpage/login_page.dart';
@@ -37,11 +39,16 @@ class _SignUpState extends State<SignUp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
+      // resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: SingleChildScrollView(
           reverse: true,
           child: Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage("images/1.jpg")
+              )
+            ),
             margin: const EdgeInsets.symmetric(horizontal: 15),
             padding: const EdgeInsets.all(8),
             child: Column(
@@ -102,6 +109,7 @@ class _SignUpState extends State<SignUp> {
                           setState(() {
                             obserText = !obserText;
                           });
+                          //hide the keyboard
                           FocusScope.of(context).unfocus();
                         },
                         child: Icon(
@@ -114,6 +122,7 @@ class _SignUpState extends State<SignUp> {
                 ),
                 ConstSize.kheight,
                 TextFormField(
+                  keyboardType: TextInputType.phone,
                   controller: phoneController,
                   decoration: InputDecoration(
                     hintText: 'Phone',
@@ -170,6 +179,9 @@ class _SignUpState extends State<SignUp> {
                           signupRequest.name = nameController.text.trim();
                           signupRequest.phone = phoneController.text.trim();
                           SignUpService signUpService = SignUpService();
+                          Map signup = ({'email': emailController.text,});
+                          var json = jsonEncode(signup);
+                          print(json);
                           signUpService.signup(signupRequest).then((value) {
                             setState(() {
                               isLoading = false;
